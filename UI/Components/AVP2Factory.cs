@@ -20,7 +20,7 @@ namespace LiveSplit.UI.Components
         // Fill in this empty string with the path of the XML file containing update information.
         // Check other LiveSplit components for examples of this. If you're not uploading this to
         // GitHub or somewhere, you can ignore this.
-        public string XMLURL => UpdateURL + "";
+        public string XMLURL => UpdateURL + "UI/Components/Updates.xml";
 
         public Version Version => Assembly.GetExecutingAssembly().GetName().Version;
     }
