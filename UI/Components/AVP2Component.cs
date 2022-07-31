@@ -14,7 +14,7 @@ namespace LiveSplit.UI.Components
         public AVP2Settings Settings { get; set; }
         protected LiveSplitState CurrentState { get; set; }
 
-        public string ComponentName => "AvP2 Autosplitter";
+        public string ComponentName => "AVP2 Autosplitter";
 
         public IDictionary<string, Action> ContextMenuControls => null;
 
