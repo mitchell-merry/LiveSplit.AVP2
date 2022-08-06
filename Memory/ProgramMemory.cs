@@ -4,10 +4,11 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
+/// <summary>
+/// Original code by The_One.
+/// </summary>
 public class ProcessMemory
 {
-    // BY THE_ONE, UNTOUCHED
-
     [DllImport("kernel32.dll", SetLastError = true)]
     private static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, uint dwSize, uint lpNumberOfBytesRead);
 
