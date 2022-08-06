@@ -1,4 +1,5 @@
-﻿using Livesplit.AVP2.UI.Components;
+﻿using Livesplit.AVP2.Memory;
+using Livesplit.AVP2.UI.Components;
 using LiveSplit.Model;
 using System;
 using System.Collections.Generic;
@@ -45,7 +46,7 @@ namespace LiveSplit.UI.Components
 
         public void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode)
         {
-
+            AVP2Memory.UpdateValues();
         }
 
         public void Dispose()
