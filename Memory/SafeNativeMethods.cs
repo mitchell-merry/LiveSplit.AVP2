@@ -2,11 +2,8 @@
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace Livesplit.AVP2.Memory
+namespace LiveSplit.AVP2.Memory
 {
-    /// <summary>
-    /// Original code by The_One.
-    /// </summary>
     static class SafeNativeMethods
     {
         [DllImport("kernel32.dll", SetLastError = true)]

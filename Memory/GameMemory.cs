@@ -7,11 +7,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Livesplit.AVP2.Memory
+namespace LiveSplit.AVP2.Memory
 {
-    /// <summary>
-    /// Original code by The_One.
-    /// </summary>
     public class GameMemory
     {
         /// <summary>

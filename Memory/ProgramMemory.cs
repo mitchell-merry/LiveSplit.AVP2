@@ -216,7 +216,7 @@ public class ProcessMemory
         : "";
 
     public string ReadStringASCII(IntPtr addr, uint size) => CheckProcess()
-        ? Encoding.ASCII.GetString(ReadByteArray(addr, size), 0, (int)size)
+        ? Encoding.ASCII.GetString(ReadByteArray(addr, size), 0, (int)size).TrimEnd('\0')
         : "";
 
     public char ReadChar(IntPtr addr) => CheckProcess()

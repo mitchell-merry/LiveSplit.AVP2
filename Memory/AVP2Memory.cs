@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Diagnostics;
+using LiveSplit.AVP2.Memory;
 
 namespace Livesplit.AVP2.Memory
 {
@@ -14,16 +15,17 @@ namespace Livesplit.AVP2.Memory
         public static GameStates GameState { get; set; }
         public static string LevelName { get; set; }
         public static bool HasControl { get; set; }
+        public static bool HadControl { get; set; }
 
         public static bool attached = false;
+        public static AVP2Version info = null;
 
         private static Process _process;
         private static ProcessMemory _pm;
-        private static AVP2Version attachedVersion = null;
 
         public static void UpdateValues()
         {
-            if(!attached)
+            if (!attached)
             {
                 var tempProc = Process.GetProcesses().FirstOrDefault(x => PROCESS_NAME.Contains(x.ProcessName.ToLower()));
 
@@ -33,11 +35,11 @@ namespace Livesplit.AVP2.Memory
                     _pm = new ProcessMemory(_process, (IntPtr)_process.Id);
 
                     attached = true;
-                    attachedVersion = VersionInfo.info[_process.MainModule.ModuleMemorySize];
+                    info = VersionInfo.info[_process.MainModule.ModuleMemorySize];
 
-                    if (attachedVersion == null)
+                    if (info == null)
                     {
-                        Trace.WriteLine("Unknown version: " + _process.MainModule.ModuleMemorySize.ToString("X"));
+                        Utility.Log("Unknown version: " + _process.MainModule.ModuleMemorySize.ToString("X"));
                         return;
                     }
                 }
@@ -47,8 +49,7 @@ namespace Livesplit.AVP2.Memory
             if (_pm.getBaseAddress == 0)
             {
                 attached = false;
-                attachedVersion = null;
-                Trace.WriteLine("GBA is 0");
+                info = null;
                 return;
             }
 
@@ -82,18 +83,19 @@ namespace Livesplit.AVP2.Memory
 
         private static void UpdateGameState(ProcessModuleEx d3d)
         {
-            var val = _pm.TraverseByte(d3d.BaseAddress + attachedVersion.GameState.Base, attachedVersion.GameState.Offsets) ?? 0;
-            GameState = attachedVersion.GameStates[val];
+            var val = _pm.TraverseByte(d3d.BaseAddress + info.GameState.Base, info.GameState.Offsets) ?? 0;
+            GameState = info.GameStates[val];
         }
 
         private static void UpdateLevelName(ProcessModuleEx objectlto)
         {
-            LevelName = _pm.TraverseStringASCII(objectlto.BaseAddress + attachedVersion.LevelName.Base, attachedVersion.LevelName.Offsets, 32);
+            LevelName = _pm.TraverseStringASCII(objectlto.BaseAddress + info.LevelName.Base, info.LevelName.Offsets, 32);
         }
 
         private static void UpdateHasControl(ProcessModuleEx cshell)
         {
-            HasControl = _pm.TraverseBoolean(cshell.BaseAddress + attachedVersion.HasControl.Base, attachedVersion.HasControl.Offsets) ?? false;
+            HadControl = HasControl;
+            HasControl = _pm.TraverseBoolean(cshell.BaseAddress + info.HasControl.Base, info.HasControl.Offsets) ?? false;
         }
     }
 }

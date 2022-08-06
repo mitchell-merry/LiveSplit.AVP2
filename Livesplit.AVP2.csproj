@@ -49,6 +49,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utility.cs" />
     <Compile Include="Memory\AVP2Memory.cs" />
     <Compile Include="Memory\GameMemory.cs" />
     <Compile Include="Memory\SafeNativeMethods.cs" />
