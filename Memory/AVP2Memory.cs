@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Diagnostics;
 using LiveSplit.AVP2.Memory;
+using LiveSplit.ComponentUtil;
+using System.Text;
 
 namespace Livesplit.AVP2.Memory
 {
@@ -13,6 +15,7 @@ namespace Livesplit.AVP2.Memory
 
         // Values we need, refreshed on every UpdateValues() call.
         public static GameStates GameState { get; set; }
+        public static GameStates OldGameState { get; set; }
         public static string LevelName { get; set; }
         public static string OldLevelName { get; set; }
         public static bool HasControl { get; set; }
@@ -23,6 +26,8 @@ namespace Livesplit.AVP2.Memory
 
         private static Process _process;
         private static ProcessMemory _pm;
+
+        private static IntPtr object_lto;
 
         public static void UpdateValues()
         {
@@ -56,25 +61,9 @@ namespace Livesplit.AVP2.Memory
 
             try
             {
-                
-                var d3d = GameMemory.GetProcessModules(_process).FirstOrDefault(x => x.ModuleName.ToLower() == "d3d.ren");
-                var objectlto = GameMemory.GetProcessModules(_process).FirstOrDefault(x => x.ModuleName.ToLower() == "object.lto");
-                var cshell = GameMemory.GetProcessModules(_process).FirstOrDefault(x => x.ModuleName.ToLower() == "cshell.dll");
-
-                if (d3d != null)
-                {
-                    UpdateGameState(d3d);
-                }
-                
-                if (objectlto != null)
-                {
-                    UpdateLevelName(objectlto);
-                }
-
-                if (cshell != null)
-                {
-                    UpdateHasControl(cshell);
-                }
+                UpdateGameState();
+                UpdateLevelName();
+                UpdateHasControl();
             }
             catch (Exception ex)
             {
@@ -82,22 +71,48 @@ namespace Livesplit.AVP2.Memory
             }
         }
 
-        private static void UpdateGameState(ProcessModuleEx d3d)
+        private static void UpdateGameState()
         {
-            var val = _pm.TraverseByte(d3d.BaseAddress + info.GameState.Base, info.GameState.Offsets) ?? 0;
+            OldGameState = GameState;
+            
+            var val = new DeepPointer("d3d.ren", info.GameState.Base, info.GameState.Offsets).Deref<byte>(_process);
+            //var val = _pm.TraverseByte(d3d.BaseAddress + info.GameState.Base, info.GameState.Offsets) ?? 0;
+
             GameState = info.GameStates[val];
         }
 
-        private static void UpdateLevelName(ProcessModuleEx objectlto)
+        private static void UpdateLevelName()
         {
             OldLevelName = LevelName;
-            LevelName = _pm.TraverseStringASCII(objectlto.BaseAddress + info.LevelName.Base, info.LevelName.Offsets, 32);
+
+            // Refind the objectlto base address - gets unloaded on returning to main menu
+            if (OldGameState == GameStates.Loading && GameState == GameStates.InGame)
+            {
+                foreach (var m in GameMemory.GetProcessModules(_process))
+                {
+                    if (m.ModuleName.ToLower() == "object.lto")
+                    {
+                        Utility.Log("old: " + object_lto + ", new: " + m.BaseAddress);
+                        object_lto = m.BaseAddress;
+                        break;
+                    }
+                }
+            }
+
+            if (GameState == GameStates.MainMenu || object_lto == IntPtr.Zero) LevelName = "NONE";
+
+            var sb = new StringBuilder();
+            new DeepPointer(object_lto + info.LevelName.Base, info.LevelName.Offsets)
+                 .DerefString(_process, ReadStringType.ASCII, sb);
+            LevelName = sb.ToString() ?? "NONE";
+            //LevelName = _pm.TraverseStringASCII(objectlto.BaseAddress + info.LevelName.Base, info.LevelName.Offsets, 32);
         }
 
-        private static void UpdateHasControl(ProcessModuleEx cshell)
+        private static void UpdateHasControl()
         {
             HadControl = HasControl;
-            HasControl = _pm.TraverseBoolean(cshell.BaseAddress + info.HasControl.Base, info.HasControl.Offsets) ?? false;
+            HasControl = new DeepPointer("cshell.dll", info.HasControl.Base, info.HasControl.Offsets).Deref<bool>(_process, false);
+            //HasControl = _pm.TraverseBoolean(cshell.BaseAddress + info.HasControl.Base, info.HasControl.Offsets) ?? false;
         }
     }
 }

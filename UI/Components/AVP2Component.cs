@@ -60,12 +60,28 @@ namespace LiveSplit.UI.Components
 
             if (!AVP2Memory.attached) return;
 
+            if (AVP2Memory.LevelName != AVP2Memory.OldLevelName)
+            {
+                Utility.Log("LN: " + AVP2Memory.LevelName + " from " + AVP2Memory.OldLevelName);
+            }
+
+            if (AVP2Memory.GameState != AVP2Memory.OldGameState)
+            {
+                Utility.Log("GS: " + AVP2Memory.GameState + " from " + AVP2Memory.OldGameState);
+            }
+
+            if (AVP2Memory.HasControl != AVP2Memory.HadControl)
+            {
+                Utility.Log("HC: " + AVP2Memory.HasControl + " from " + AVP2Memory.HadControl);
+            }
+
             HandleLoading();
             if (state.CurrentPhase == TimerPhase.Running)
             {
                 if (ShouldSplit())
                 {
                     Model.Split();
+                    Utility.Log("---Splitting Timer--- LN: " + AVP2Memory.LevelName + ", " + AVP2Memory.OldLevelName);
                 }
             }
             else if(state.CurrentPhase == TimerPhase.NotRunning)
@@ -85,7 +101,7 @@ namespace LiveSplit.UI.Components
              && AVP2Memory.HasControl && !AVP2Memory.HadControl
              && AVP2Memory.info.CampaignStarts.Contains(AVP2Memory.LevelName))
             {
-                Utility.Log("---Starting Timer---");
+                Utility.Log("---Starting Timer--- LN: " + AVP2Memory.LevelName + ", " + AVP2Memory.OldLevelName);
                 Model.Start();
             }
             else
@@ -99,6 +115,11 @@ namespace LiveSplit.UI.Components
 
         public bool ShouldSplit()
         {
+            if (AVP2Memory.OldLevelName == "" || AVP2Memory.LevelName == "")
+            {
+                return false;
+            }
+
             if (AVP2Memory.OldLevelName != AVP2Memory.LevelName
              && !AVP2Memory.info.Cutscenes.Contains(AVP2Memory.OldLevelName))
             {

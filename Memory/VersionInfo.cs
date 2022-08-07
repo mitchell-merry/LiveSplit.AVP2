@@ -65,7 +65,7 @@ namespace Livesplit.AVP2.Memory
                         { 0xB8, AVP2Memory.GameStates.MainMenu },
                         { 0x94, AVP2Memory.GameStates.Loading },
                     },
-                    CampaignStarts = new[] { "H1S1", "P1S1", "A1S1" },
+                    CampaignStarts = new[] { "H1S2", "P1S1", "A1S1" },
                     CampaignEnds   = new[] { "H3S2", "P3S3", "A3S3" },
                     ILStarts       = new[] { "H1S1", "H2S1", "H3S1",
                                              "P1S1", "P2S1", "P3S1",
