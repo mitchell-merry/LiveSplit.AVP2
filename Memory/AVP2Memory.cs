@@ -20,6 +20,7 @@ namespace Livesplit.AVP2.Memory
         public static string OldLevelName { get; set; }
         public static bool HasControl { get; set; }
         public static bool HadControl { get; set; }
+        public static int Health { get; set; }
 
         public static bool attached = false;
         public static AVP2Version info = null;
@@ -64,6 +65,7 @@ namespace Livesplit.AVP2.Memory
                 UpdateGameState();
                 UpdateLevelName();
                 UpdateHasControl();
+                UpdateHealth();
             }
             catch (Exception ex)
             {
@@ -113,6 +115,11 @@ namespace Livesplit.AVP2.Memory
             HadControl = HasControl;
             HasControl = new DeepPointer("cshell.dll", info.HasControl.Base, info.HasControl.Offsets).Deref<bool>(_process, false);
             //HasControl = _pm.TraverseBoolean(cshell.BaseAddress + info.HasControl.Base, info.HasControl.Offsets) ?? false;
+        }
+
+        private static void UpdateHealth()
+        {
+            Health = new DeepPointer("cshell.dll", info.Health.Base, info.Health.Offsets).Deref<int>(_process);
         }
     }
 }

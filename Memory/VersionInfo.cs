@@ -15,6 +15,7 @@ namespace Livesplit.AVP2.Memory
         public PointerPath GameState { get; set; }
         public PointerPath LevelName { get; set; }
         public PointerPath HasControl { get; set; }
+        public PointerPath Health { get; set; }
         public Dictionary<byte, AVP2Memory.GameStates> GameStates { get; set; }
         public string[] CampaignStarts { get; set; }
         public string[] CampaignEnds { get; set; }
@@ -36,6 +37,7 @@ namespace Livesplit.AVP2.Memory
                     GameState  = new PointerPath { Base = 0x5627C,  Offsets = new int[] { } },
                     LevelName  = new PointerPath { Base = 0x2FD9B4, Offsets = new int[] { } },
                     HasControl = new PointerPath { Base = 0x1C9A64, Offsets = new int[] { 0xD2C, 0x0 } },
+                    Health     = new PointerPath { Base = 0x1C5868, Offsets = new int[] { 0x788 } },
                     GameStates = new Dictionary<byte, AVP2Memory.GameStates> {
                         { 0x0,  AVP2Memory.GameStates.GameNotLoaded },
                         { 0x88, AVP2Memory.GameStates.InGame },
@@ -58,6 +60,7 @@ namespace Livesplit.AVP2.Memory
                     GameState = new PointerPath  { Base = 0x5C14C,  Offsets = new int[] { } },
                     LevelName = new PointerPath  { Base = 0x316155, Offsets = new int[] { } },
                     HasControl = new PointerPath { Base = 0x1F4BDC, Offsets = new int[] { 0x4, 0x1FC } },
+                    Health     = new PointerPath { Base = 0x1F4A40, Offsets = new int[] { 0x788 } },
                     GameStates = new Dictionary<byte, AVP2Memory.GameStates> {
                         { 0x0,  AVP2Memory.GameStates.GameNotLoaded },
                         { 0x10, AVP2Memory.GameStates.InGame },

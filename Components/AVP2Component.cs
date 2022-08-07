@@ -75,6 +75,11 @@ namespace LiveSplit.UI.Components
                 Utility.Log("HC: " + AVP2Memory.HasControl + " from " + AVP2Memory.HadControl);
             }
 
+            if (AVP2Memory.Health != AVP2Memory.Health)
+            {
+                Utility.Log("HT: " + AVP2Memory.Health + " from " + AVP2Memory.Health);
+            }
+
             HandleLoading();
             if (state.CurrentPhase == TimerPhase.Running)
             {
@@ -127,7 +132,8 @@ namespace LiveSplit.UI.Components
             }
 
             if (AVP2Memory.HadControl && !AVP2Memory.HasControl
-             && AVP2Memory.info.CampaignEnds.Contains(AVP2Memory.LevelName))
+             && AVP2Memory.info.CampaignEnds.Contains(AVP2Memory.LevelName)
+             && AVP2Memory.Health > 0)
             {
                 return true;
             }
