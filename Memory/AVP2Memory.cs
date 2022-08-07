@@ -14,6 +14,7 @@ namespace Livesplit.AVP2.Memory
         // Values we need, refreshed on every UpdateValues() call.
         public static GameStates GameState { get; set; }
         public static string LevelName { get; set; }
+        public static string OldLevelName { get; set; }
         public static bool HasControl { get; set; }
         public static bool HadControl { get; set; }
 
@@ -89,6 +90,7 @@ namespace Livesplit.AVP2.Memory
 
         private static void UpdateLevelName(ProcessModuleEx objectlto)
         {
+            OldLevelName = LevelName;
             LevelName = _pm.TraverseStringASCII(objectlto.BaseAddress + info.LevelName.Base, info.LevelName.Offsets, 32);
         }
 

@@ -58,10 +58,18 @@ namespace LiveSplit.UI.Components
         {
             AVP2Memory.UpdateValues();
 
+            if (!AVP2Memory.attached) return;
 
-            if(AVP2Memory.attached)
+            HandleLoading();
+            if (state.CurrentPhase == TimerPhase.Running)
             {
-                HandleLoading();
+                if (ShouldSplit())
+                {
+                    Model.Split();
+                }
+            }
+            else if(state.CurrentPhase == TimerPhase.NotRunning)
+            {
                 HandleStart();
             }
         }
@@ -87,6 +95,23 @@ namespace LiveSplit.UI.Components
                 //Utility.Log("HDC: " + AVP2Memory.HadControl);
                 //Utility.Log("LN:  " + AVP2Memory.LevelName);
             }
+        }
+
+        public bool ShouldSplit()
+        {
+            if (AVP2Memory.OldLevelName != AVP2Memory.LevelName
+             && !AVP2Memory.info.Cutscenes.Contains(AVP2Memory.OldLevelName))
+            {
+                return true;
+            }
+
+            if (AVP2Memory.HadControl && !AVP2Memory.HasControl
+             && AVP2Memory.info.CampaignEnds.Contains(AVP2Memory.LevelName))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public void Dispose()
