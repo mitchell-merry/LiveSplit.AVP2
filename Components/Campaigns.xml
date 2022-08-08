@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Campaigns>
+	<Campaign Name="Marine" Game="AVP2">
+		<Mission>
+			<Name>Unwelcome Guest</Name>
+			<Levels>4</Levels>
+		</Mission>
+		<Mission>
+			<Name>Collateral Damage</Name>
+			<Levels>1</Levels>
+		</Mission>
+		<Mission>
+			<Name>Betrayal</Name>
+			<Levels>5</Levels>
+		</Mission>
+		<Mission>
+			<Name>A Long Detour</Name>
+			<Levels>2</Levels>
+		</Mission>
+		<Mission>
+			<Name>Price of Admission</Name>
+			<Levels>1</Levels>
+		</Mission>
+		<Mission>
+			<Name>Loose Ends</Name>
+			<Levels>1</Levels>
+		</Mission>
+		<Mission>
+			<Name>Savior</Name>
+			<Levels>2</Levels>
+		</Mission>
+	</Campaign>
+	<Campaign Name="Predator" Game="AVP2">
+		<Mission>
+			<Name>Hunt</Name>
+			<Levels>1</Levels>
+		</Mission>
+		<Mission>
+			<Name>Trap</Name>
+			<Levels>1</Levels>
+		</Mission>
+		<Mission>
+			<Name>Interloper</Name>
+			<Levels>3</Levels>
+		</Mission>
+		<Mission>
+			<Name>Allies</Name>
+			<Levels>3</Levels>
+		</Mission>
+		<Mission>
+			<Name>Old Debts</Name>
+			<Levels>1</Levels>
+		</Mission>
+		<Mission>
+			<Name>New Target</Name>
+			<Levels>2</Levels>
+		</Mission>
+		<Mission>
+			<Name>Trophy</Name>
+			<Levels>2</Levels>
+		</Mission>
+	</Campaign>
+	<Campaign Name="Alien" Game="AVP2">
+		<Mission>
+			<Name>Birth</Name>
+			<Levels>2</Levels>
+		</Mission>
+		<Mission>
+			<Name>Surprise</Name>
+			<Levels>3</Levels>
+		</Mission>
+		<Mission>
+			<Name>Escape</Name>
+			<Levels>2</Levels>
+		</Mission>
+		<Mission>
+			<Name>Vengeance</Name>
+			<Levels>2</Levels>
+		</Mission>
+		<Mission>
+			<Name>Abduction</Name>
+			<Levels>1</Levels>
+		</Mission>
+		<Mission>
+			<Name>Pursuit</Name>
+			<Levels>1</Levels>
+		</Mission>
+		<Mission>
+			<Name>Freedom</Name>
+			<Levels>3</Levels>
+		</Mission>
+	</Campaign>
+	<Campaign Name="Corporate" Game="AVP2PH">
+		<Mission>
+			<Name>Zeta Site</Name>
+			<Levels>1</Levels>
+		</Mission>
+		<Mission>
+			<Name>Artifact</Name>
+			<Levels>1</Levels>
+		</Mission>
+		<Mission>
+			<Name>Severance</Name>
+			<Levels>1</Levels>
+		</Mission>
+	</Campaign>
+	<Campaign Name="Predator" Game="AVP2PH">
+		<Mission>
+			<Name>Legend</Name>
+			<Levels>2</Levels>
+		</Mission>
+		<Mission>
+			<Name>Stasis</Name>
+			<Levels>2</Levels>
+		</Mission>
+		<Mission>
+			<Name>Honor and Death</Name>
+			<Levels>3</Levels>
+		</Mission>
+	</Campaign>
+	<Campaign Name="Alien" Game="AVP2PH">
+		<Mission>
+			<Name>New Hosts</Name>
+			<Levels>1</Levels>
+		</Mission>
+		<Mission>
+			<Name>Body Bags</Name>
+			<Levels>1</Levels>
+		</Mission>
+		<Mission>
+			<Name>Freefall</Name>
+			<Levels>2</Levels>
+		</Mission>
+	</Campaign>
+</Campaigns>
