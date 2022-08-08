@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Diagnostics;
-using LiveSplit.AVP2.Memory;
 using LiveSplit.ComponentUtil;
 using System.Text;
 
@@ -26,7 +25,7 @@ namespace Livesplit.AVP2.Memory
         public static AVP2Version info = null;
 
         private static Process _process;
-        private static ProcessMemory _pm;
+        //private static ProcessMemory _pm;
 
         private static IntPtr object_lto;
 
@@ -39,7 +38,7 @@ namespace Livesplit.AVP2.Memory
                 if (tempProc != null && !tempProc.HasExited)
                 {
                     _process = tempProc;
-                    _pm = new ProcessMemory(_process, (IntPtr)_process.Id);
+                    //_pm = new ProcessMemory(_process, (IntPtr)_process.Id);
 
                     attached = true;
                     info = VersionInfo.info[_process.MainModule.ModuleMemorySize];
@@ -53,10 +52,11 @@ namespace Livesplit.AVP2.Memory
                 return;
             }
 
-            if (_pm.getBaseAddress == 0)
+            if (_process.HasExited)
             {
                 attached = false;
                 info = null;
+                _process = null;
                 return;
             }
 
@@ -90,15 +90,9 @@ namespace Livesplit.AVP2.Memory
             // Refind the objectlto base address - gets unloaded on returning to main menu
             if (OldGameState == GameStates.Loading && GameState == GameStates.InGame)
             {
-                foreach (var m in GameMemory.GetProcessModules(_process))
-                {
-                    if (m.ModuleName.ToLower() == "object.lto")
-                    {
-                        Utility.Log("old: " + object_lto + ", new: " + m.BaseAddress);
-                        object_lto = m.BaseAddress;
-                        break;
-                    }
-                }
+                var newAddr = ModuleInfo.GetModuleBases(_process)["object.lto"];
+                Utility.Log("objectlto: " + newAddr.ToString("X") + " from " + object_lto.ToString("X"));
+                object_lto = newAddr;
             }
 
             if (GameState == GameStates.MainMenu || object_lto == IntPtr.Zero) LevelName = "NONE";
@@ -121,5 +115,7 @@ namespace Livesplit.AVP2.Memory
         {
             Health = new DeepPointer("cshell.dll", info.Health.Base, info.Health.Offsets).Deref<int>(_process);
         }
+
+
     }
 }

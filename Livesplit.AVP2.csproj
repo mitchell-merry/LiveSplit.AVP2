@@ -49,12 +49,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Memory\ModuleInfo.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Memory\AVP2Memory.cs" />
-    <Compile Include="Memory\GameMemory.cs" />
-    <Compile Include="Memory\SafeNativeMethods.cs" />
     <Compile Include="Memory\VersionInfo.cs" />
-    <Compile Include="Memory\ProgramMemory.cs" />
     <Compile Include="Components\AVP2Component.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Components\AVP2Factory.cs" />

@@ -57,8 +57,8 @@ namespace Livesplit.AVP2.Memory
             // AVP2: PH
             { 0x100000, new AVP2Version {
                     Name = "avp2ph",
-                    GameState = new PointerPath  { Base = 0x5C14C,  Offsets = new int[] { } },
-                    LevelName = new PointerPath  { Base = 0x316155, Offsets = new int[] { } },
+                    GameState  = new PointerPath { Base = 0x5C14C,  Offsets = new int[] { } },
+                    LevelName  = new PointerPath { Base = 0x316155, Offsets = new int[] { } },
                     HasControl = new PointerPath { Base = 0x1F4BDC, Offsets = new int[] { 0x4, 0x1FC } },
                     Health     = new PointerPath { Base = 0x1F4A40, Offsets = new int[] { 0x788 } },
                     GameStates = new Dictionary<byte, AVP2Memory.GameStates> {
