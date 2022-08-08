@@ -1,6 +1,6 @@
 ﻿using Livesplit.AVP2;
 using Livesplit.AVP2.Memory;
-using Livesplit.AVP2.UI.Components;
+using Livesplit.AVP2.Components;
 using LiveSplit.Model;
 using System;
 using System.Collections.Generic;
@@ -25,7 +25,7 @@ namespace LiveSplit.UI.Components
 
         public AVP2Component(LiveSplitState state)
         {
-            Settings = new AVP2Settings();
+            Settings = new AVP2Settings(state);
 
             if (state != null)
             {

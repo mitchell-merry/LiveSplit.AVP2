@@ -49,7 +49,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\AddSplitsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\AddSplitsDialog.Designer.cs">
+      <DependentUpon>AddSplitsDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Memory\ModuleInfo.cs" />
+    <Compile Include="SplitsData\Campaign.cs" />
+    <Compile Include="SplitsData\CampaignManager.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Memory\AVP2Memory.cs" />
     <Compile Include="Memory\VersionInfo.cs" />
@@ -65,8 +73,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Components\Updates.xml" />
+    <Content Include="Resources\AVP2.Campaigns.xml" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Components\AddSplitsDialog.resx">
+      <DependentUpon>AddSplitsDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Components\AVP2Settings.resx">
       <DependentUpon>AVP2Settings.cs</DependentUpon>
     </EmbeddedResource>
@@ -75,6 +87,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy $(ProjectDir)$(OutDir)$(TargetFileName) "D:\lil apps\LiveSplit_1.8.19\Components\"
-copy $(ProjectDir)$(OutDir)$(TargetFileName) $(ProjectDir)"Components\"</PostBuildEvent>
+copy $(ProjectDir)"Resources\AVP2.Campaigns.xml" "D:\lil apps\LiveSplit_1.8.19\Components\"
+copy $(ProjectDir)$(OutDir)$(TargetFileName) $(ProjectDir)"Resources\"</PostBuildEvent>
   </PropertyGroup>
 </Project>
