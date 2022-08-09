@@ -87,7 +87,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy $(ProjectDir)$(OutDir)$(TargetFileName) "D:\lil apps\LiveSplit_1.8.19\Components\"
-copy $(ProjectDir)"Resources\AVP2.Campaigns.xml" "D:\lil apps\LiveSplit_1.8.19\Components\"
-copy $(ProjectDir)$(OutDir)$(TargetFileName) $(ProjectDir)"Resources\"</PostBuildEvent>
+copy $(ProjectDir)"SplitsData\AVP2.Campaigns.xml" "D:\lil apps\LiveSplit_1.8.19\Components\"
+copy $(ProjectDir)"SplitsData\AVP2.Campaigns.xml" $(ProjectDir)$(OutDir)</PostBuildEvent>
   </PropertyGroup>
 </Project>

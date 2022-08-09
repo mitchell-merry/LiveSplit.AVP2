@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Campaigns>
+	<Campaign Name="Marine" Game="avp2">
+		<Mission Name="Unwelcome Guest"    Levels="4" />
+		<Mission Name="Collateral Damage"  Levels="1" />
+		<Mission Name="Betrayal"           Levels="5" />
+		<Mission Name="A Long Detour"      Levels="2" />
+		<Mission Name="Price of Admission" Levels="1" />
+		<Mission Name="Loose Ends"         Levels="1" />
+		<Mission Name="Savior"             Levels="2" />
+	</Campaign>
+	<Campaign Name="Predator" Game="avp2">
+		<Mission Name="Hunt"       Levels="1" />
+		<Mission Name="Trap"       Levels="1" />
+		<Mission Name="Interloper" Levels="3" />
+		<Mission Name="Allies"     Levels="3" />
+		<Mission Name="Old Debts"  Levels="1" />
+		<Mission Name="New Target" Levels="2" />
+		<Mission Name="Trophy"     Levels="2" />
+	</Campaign>
+	<Campaign Name="Alien" Game="avp2">
+		<Mission Name="Birth"     Levels="2" />
+		<Mission Name="Surprise"  Levels="3" />
+		<Mission Name="Escape"    Levels="2" />
+		<Mission Name="Vengeance" Levels="2" />
+		<Mission Name="Abduction" Levels="1" />
+		<Mission Name="Pursuit"   Levels="1" />
+		<Mission Name="Freedom"   Levels="3" />
+	</Campaign>
+	<Campaign Name="Corporate" Game="avp2ph">
+		<Mission Name="Zeta Site" Levels="1" />
+		<Mission Name="Artifact"  Levels="1" />
+		<Mission Name="Severance" Levels="1" />
+	</Campaign>
+	<Campaign Name="Predator" Game="avp2ph">
+		<Mission Name="Legend"          Levels="2" />
+		<Mission Name="Stasis"          Levels="2" />
+		<Mission Name="Honor and Death" Levels="3" />
+	</Campaign>
+	<Campaign Name="Predalien" Game="avp2ph">
+		<Mission Name="New Hosts" Levels="1" />
+		<Mission Name="Body Bags" Levels="1" />
+		<Mission Name="Freefall"  Levels="2" />
+	</Campaign>
+</Campaigns>
