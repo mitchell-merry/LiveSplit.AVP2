@@ -6,7 +6,12 @@ namespace Livesplit.AVP2.SplitsData
     public static class CampaignManager
     {
         private const string CAMPAIGNS_XML = @"Components/AVP2.Campaigns.xml";
-
+        public static Dictionary<string, string> GameToLabel = new Dictionary<string, string>()
+        {
+            { "avp2", "Aliens versus Predator 2" },
+            { "avp2ph", "Aliens versus Predator 2: Primal Hunt" }
+        };
+        
         public static List<Campaign> GetCampaigns()
         {
             var ret = new List<Campaign>();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Livesplit.AVP2.SplitsData;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,9 +15,10 @@ namespace Livesplit.AVP2.Components
     {
         public AddSplitsOption Action = AddSplitsOption.Pending;
 
-        public AddSplitsDialog()
+        public AddSplitsDialog(string Game, string Name, int LevelCount)
         {
             InitializeComponent();
+            areyousure.Text = String.Format(areyousure.Text, LevelCount, CampaignManager.GameToLabel[Game], Name);
         }
 
         private void AddSplitsDialog_Load(object sender, EventArgs e)

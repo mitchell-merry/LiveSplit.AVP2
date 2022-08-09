@@ -66,7 +66,7 @@ namespace Livesplit.AVP2.Components
                 return;
             }
 
-            using (var asd = new AddSplitsDialog())
+            using (var asd = new AddSplitsDialog(campaign.Game, campaign.Name, campaign.LevelCount))
             {
                 DialogResult res = asd.ShowDialog();
 

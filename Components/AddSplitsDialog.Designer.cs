@@ -41,9 +41,9 @@
             this.areyousure.Location = new System.Drawing.Point(29, 29);
             this.areyousure.Margin = new System.Windows.Forms.Padding(20, 20, 0, 0);
             this.areyousure.Name = "areyousure";
-            this.areyousure.Size = new System.Drawing.Size(379, 13);
+            this.areyousure.Size = new System.Drawing.Size(286, 13);
             this.areyousure.TabIndex = 1;
-            this.areyousure.Text = "Are you sure you want to add these %LevelCount% %Game% - %Name% splits?";
+            this.areyousure.Text = "Are you sure you want to add these {0} splits from {1} - {2}?";
             this.areyousure.Click += new System.EventHandler(this.areyousure_Click);
             // 
             // label1
@@ -58,9 +58,9 @@
             // 
             // cancel
             // 
-            this.cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cancel.Location = new System.Drawing.Point(29, 104);
-            this.cancel.Margin = new System.Windows.Forms.Padding(20, 3, 3, 10);
+            this.cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancel.Location = new System.Drawing.Point(405, 104);
+            this.cancel.Margin = new System.Windows.Forms.Padding(3, 3, 20, 10);
             this.cancel.Name = "cancel";
             this.cancel.Size = new System.Drawing.Size(75, 23);
             this.cancel.TabIndex = 8;
@@ -70,9 +70,9 @@
             // 
             // addSubsplits
             // 
-            this.addSubsplits.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.addSubsplits.Location = new System.Drawing.Point(234, 104);
-            this.addSubsplits.Margin = new System.Windows.Forms.Padding(3, 3, 10, 10);
+            this.addSubsplits.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.addSubsplits.Location = new System.Drawing.Point(29, 104);
+            this.addSubsplits.Margin = new System.Windows.Forms.Padding(20, 3, 3, 10);
             this.addSubsplits.Name = "addSubsplits";
             this.addSubsplits.Size = new System.Drawing.Size(96, 23);
             this.addSubsplits.TabIndex = 7;
@@ -82,9 +82,9 @@
             // 
             // addNormal
             // 
-            this.addNormal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.addNormal.Location = new System.Drawing.Point(343, 104);
-            this.addNormal.Margin = new System.Windows.Forms.Padding(3, 3, 20, 10);
+            this.addNormal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.addNormal.Location = new System.Drawing.Point(138, 104);
+            this.addNormal.Margin = new System.Windows.Forms.Padding(10, 3, 3, 10);
             this.addNormal.Name = "addNormal";
             this.addNormal.Size = new System.Drawing.Size(75, 23);
             this.addNormal.TabIndex = 6;
@@ -96,7 +96,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(447, 146);
+            this.ClientSize = new System.Drawing.Size(509, 146);
             this.Controls.Add(this.cancel);
             this.Controls.Add(this.addSubsplits);
             this.Controls.Add(this.addNormal);
