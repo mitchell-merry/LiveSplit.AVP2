@@ -23,6 +23,9 @@ namespace LiveSplit.UI.Components
 
         public IDictionary<string, Action> ContextMenuControls => null;
 
+        public List<string> CompletedLevels = new List<string>();
+        private string _currSplit = "";
+
         public AVP2Component(LiveSplitState state)
         {
             Settings = new AVP2Settings(state);
@@ -32,6 +35,11 @@ namespace LiveSplit.UI.Components
                 Model = new TimerModel() { CurrentState = state };
                 Model.InitializeGameTime();
                 CurrentState = state;
+
+                Model.CurrentState.OnSplit += OnSplit;
+                Model.CurrentState.OnUndoSplit += OnUndoSplit;
+                Model.CurrentState.OnSkipSplit += OnSkipSplit;
+                Model.CurrentState.OnReset += OnReset;
             }
         }
 
@@ -60,25 +68,7 @@ namespace LiveSplit.UI.Components
 
             if (!AVP2Memory.attached) return;
 
-            if (AVP2Memory.LevelName != AVP2Memory.OldLevelName)
-            {
-                Utility.Log("LN: " + AVP2Memory.LevelName + " from " + AVP2Memory.OldLevelName);
-            }
-
-            if (AVP2Memory.GameState != AVP2Memory.OldGameState)
-            {
-                Utility.Log("GS: " + AVP2Memory.GameState + " from " + AVP2Memory.OldGameState);
-            }
-
-            if (AVP2Memory.HasControl != AVP2Memory.HadControl)
-            {
-                Utility.Log("HC: " + AVP2Memory.HasControl + " from " + AVP2Memory.HadControl);
-            }
-
-            if (AVP2Memory.Health != AVP2Memory.Health)
-            {
-                Utility.Log("HT: " + AVP2Memory.Health + " from " + AVP2Memory.Health);
-            }
+            Logging();
 
             HandleLoading();
             if (state.CurrentPhase == TimerPhase.Running)
@@ -125,25 +115,80 @@ namespace LiveSplit.UI.Components
                 return false;
             }
 
+            // split on switching maps
             if (AVP2Memory.OldLevelName != AVP2Memory.LevelName
-             && !AVP2Memory.info.Cutscenes.Contains(AVP2Memory.OldLevelName))
+             && !CompletedLevels.Contains(AVP2Memory.info.Name + "_" + AVP2Memory.OldLevelName)
+             && !CompletedLevels.Contains(AVP2Memory.info.Name + "_" + AVP2Memory.LevelName)
+             && !AVP2Memory.info.Cutscenes.Contains(AVP2Memory.OldLevelName)
+             && !AVP2Memory.info.CampaignStarts.Contains(AVP2Memory.LevelName))
             {
+                _currSplit = AVP2Memory.info.Name + "_" + AVP2Memory.OldLevelName;
                 return true;
             }
 
+            // last level split on cutscene
             if (AVP2Memory.HadControl && !AVP2Memory.HasControl
+             && !CompletedLevels.Contains(AVP2Memory.info.Name + "_" + AVP2Memory.LevelName)
              && AVP2Memory.info.CampaignEnds.Contains(AVP2Memory.LevelName)
              && AVP2Memory.Health > 0)
             {
+                _currSplit = AVP2Memory.info.Name + "_" + AVP2Memory.LevelName;
                 return true;
             }
 
             return false;
         }
 
+        public void OnSplit(object sender, EventArgs e)
+        {
+            CompletedLevels.Add(_currSplit);
+            _currSplit = "";
+        }
+
+        public void OnUndoSplit(object sender, EventArgs e)
+        {
+            CompletedLevels.RemoveAt(CompletedLevels.Count - 1);
+        }
+
+        public void OnSkipSplit(object sender, EventArgs e)
+        {
+            CompletedLevels.Add(_currSplit);
+        }
+
+        public void OnReset(object sender, TimerPhase e)
+        {
+            CompletedLevels.Clear();
+        }
+
         public void Dispose()
         {
+            Model.CurrentState.OnSplit -= OnSplit;
+            Model.CurrentState.OnUndoSplit -= OnUndoSplit;
+            Model.CurrentState.OnSkipSplit -= OnSkipSplit;
+            Model.CurrentState.OnReset -= OnReset;
+        }
 
+        public void Logging()
+        {
+            if (AVP2Memory.LevelName != AVP2Memory.OldLevelName)
+            {
+                Utility.Log("LN: " + AVP2Memory.LevelName + " from " + AVP2Memory.OldLevelName);
+            }
+
+            if (AVP2Memory.GameState != AVP2Memory.OldGameState)
+            {
+                Utility.Log("GS: " + AVP2Memory.GameState + " from " + AVP2Memory.OldGameState);
+            }
+
+            if (AVP2Memory.HasControl != AVP2Memory.HadControl)
+            {
+                Utility.Log("HC: " + AVP2Memory.HasControl + " from " + AVP2Memory.HadControl);
+            }
+
+            if (AVP2Memory.Health != AVP2Memory.Health)
+            {
+                Utility.Log("HT: " + AVP2Memory.Health + " from " + AVP2Memory.Health);
+            }
         }
 
         public int GetSettingsHashCode() => Settings.GetSettingsHashCode();
