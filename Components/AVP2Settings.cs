@@ -57,6 +57,8 @@ namespace Livesplit.AVP2.Components
             var Game = a[0];
             var Name = a[1];
 
+            Utility.Log("campaign: " + Game + " - " + Name);
+
             var campaign = CampaignManager.GetCampaign(Campaigns, Game, Name);
             
             // show that there's been an error and exit
@@ -103,5 +105,22 @@ namespace Livesplit.AVP2.Components
         {
 
         }
+
+        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void avp2_Marine_Click(object sender, EventArgs e) { AddSplits_Click(sender, e); }
+        private void avp2_Predator_Click(object sender, EventArgs e) { AddSplits_Click(sender, e); }
+        private void avp2_Alien_Click(object sender, EventArgs e) { AddSplits_Click(sender, e); }
+        private void avp2ph_Corporate_Click(object sender, EventArgs e) { AddSplits_Click(sender, e); }
+        private void avp2ph_Predator_Click(object sender, EventArgs e) { AddSplits_Click(sender, e); }
+        private void avp2ph_Predalien_Click(object sender, EventArgs e) { AddSplits_Click(sender, e); }
     }
 }
