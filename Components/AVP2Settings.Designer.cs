@@ -1,4 +1,4 @@
-﻿namespace Livesplit.AVP2.Components
+﻿namespace Livesplit.UI.Components
 {
     partial class AVP2Settings
     {
@@ -114,6 +114,7 @@
             this.SetSplitsGroup.TabIndex = 6;
             this.SetSplitsGroup.TabStop = false;
             this.SetSplitsGroup.Text = "Add Splits";
+            this.SetSplitsGroup.Enter += new System.EventHandler(this.SetSplitsGroup_Enter);
             // 
             // tableLayoutPanel1
             // 

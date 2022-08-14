@@ -6,13 +6,15 @@ using LiveSplit.UI;
 using System.Reflection;
 using System.Collections.Generic;
 using Livesplit.AVP2.SplitsData;
-using System.Linq;
+using Livesplit.AVP2.Components;
+using Livesplit.AVP2;
 
-namespace Livesplit.AVP2.Components
+namespace Livesplit.UI.Components
 {
     public partial class AVP2Settings : UserControl
     {
         public LayoutMode Mode { get; set; }
+        public bool ILTimer { get; set; }
         public LiveSplitState State { get; set; }
         private List<Campaign> Campaigns { get; set; }
 
@@ -22,16 +24,22 @@ namespace Livesplit.AVP2.Components
 
             Campaigns = CampaignManager.GetCampaigns();
             State = state;
+            ILTimer = false;
         }
 
         private void AVP2Settings_Load(object sender, EventArgs e)
         {
             this.Dock = DockStyle.Fill;
+
+            ILMode.Enabled = true;
+            ILMode.Checked = ILTimer;
+            ILMode.DataBindings.Clear();
         }
 
         private int CreateSettingsNode(XmlDocument document, XmlElement parent)
         {
-            return SettingsHelper.CreateSetting(document, parent, "Version", Assembly.GetExecutingAssembly().GetName().Version);
+            return SettingsHelper.CreateSetting(document, parent, "Version", Assembly.GetExecutingAssembly().GetName().Version) ^
+                   SettingsHelper.CreateSetting(document, parent, "ILTimer", ILTimer);
         }
 
         public XmlNode GetSettings(XmlDocument document)
@@ -49,6 +57,7 @@ namespace Livesplit.AVP2.Components
         public void SetSettings(XmlNode node)
         {
             var element = (XmlElement)node;
+            ILTimer = SettingsHelper.ParseBool(element["ILTimer"], false);
         }
 
         private void AddSplits_Click(object sender, EventArgs e)
@@ -101,19 +110,9 @@ namespace Livesplit.AVP2.Components
             }
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-
+            ILTimer = ILMode.Checked;
         }
 
         private void avp2_Marine_Click(object sender, EventArgs e) { AddSplits_Click(sender, e); }
@@ -122,5 +121,16 @@ namespace Livesplit.AVP2.Components
         private void avp2ph_Corporate_Click(object sender, EventArgs e) { AddSplits_Click(sender, e); }
         private void avp2ph_Predator_Click(object sender, EventArgs e) { AddSplits_Click(sender, e); }
         private void avp2ph_Predalien_Click(object sender, EventArgs e) { AddSplits_Click(sender, e); }
+
+        private void SetSplitsGroup_Enter(object sender, EventArgs e)
+        { }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        { }
+
+        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
