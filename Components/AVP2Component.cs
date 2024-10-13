@@ -95,9 +95,11 @@ namespace LiveSplit.UI.Components
             {
                 if (AVP2Memory.info.CampaignStarts.Contains(AVP2Memory.LevelName)) return true;
 
-                if (Settings.ILTimer && AVP2Memory.info.ILStarts.Contains(AVP2Memory.LevelName)) return true;
             }
 
+            if (Settings.ILTimer && AVP2Memory.OldLevelName != AVP2Memory.LevelName
+             && AVP2Memory.info.ILStarts.Contains(AVP2Memory.LevelName)) return true;
+            
             return false;
         }
 

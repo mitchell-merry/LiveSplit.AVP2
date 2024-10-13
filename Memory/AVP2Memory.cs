@@ -10,7 +10,7 @@ namespace Livesplit.AVP2.Memory
     {
         public const string PROCESS_NAME = "lithtech";
 
-        public enum GameStates { GameNotLoaded, InGame, PauseMenu, MainMenu, Loading }
+        public enum GameStates { Unknown, GameNotLoaded, InGame, PauseMenu, MainMenu, Loading }
 
         // Values we need, refreshed on every UpdateValues() call.
         public static GameStates GameState { get; set; }
@@ -31,7 +31,7 @@ namespace Livesplit.AVP2.Memory
 
         public static void UpdateValues()
         {
-            if (!attached)
+            if (!attached || info == null || _process == null)
             {
                 var tempProc = Process.GetProcesses().FirstOrDefault(x => PROCESS_NAME.Contains(x.ProcessName.ToLower()));
 
@@ -47,6 +47,11 @@ namespace Livesplit.AVP2.Memory
                     {
                         Utility.Log("Unknown version: " + _process.MainModule.ModuleMemorySize.ToString("X"));
                         return;
+                    }
+                    else
+                    {
+                        Utility.Log("Detected version [" + info.Name + "] with MMS: " + _process.MainModule.ModuleMemorySize.ToString("X"));
+
                     }
                 }
                 return;
@@ -79,8 +84,16 @@ namespace Livesplit.AVP2.Memory
             
             var val = new DeepPointer("d3d.ren", info.GameState.Base, info.GameState.Offsets).Deref<byte>(_process);
             //var val = _pm.TraverseByte(d3d.BaseAddress + info.GameState.Base, info.GameState.Offsets) ?? 0;
-
-            GameState = info.GameStates[val];
+            try
+            {
+                GameState = info.GameStates[val];
+            }
+            catch(Exception ex)
+            {
+                Utility.Log("Unknown game state: " + val.ToString());
+                GameState = GameStates.Unknown;
+                Utility.Log(ex.ToString());
+            }
         }
 
         private static void UpdateLevelName()
