@@ -80,7 +80,12 @@ namespace Livesplit.AVP2.Memory
             var val = new DeepPointer("d3d.ren", info.GameState.Base, info.GameState.Offsets).Deref<byte>(_process);
             //var val = _pm.TraverseByte(d3d.BaseAddress + info.GameState.Base, info.GameState.Offsets) ?? 0;
 
-            GameState = info.GameStates[val];
+            if (info.GameStates.ContainsKey(val)) {
+                GameState = info.GameStates[val];
+            } else {
+                Utility.Log("Unknown game state " + val.ToString("X") + " found!");
+            }
+
         }
 
         private static void UpdateLevelName()

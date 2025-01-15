@@ -41,9 +41,9 @@ namespace Livesplit.AVP2.Memory
                     GameStates = new Dictionary<byte, AVP2Memory.GameStates> {
                         { 0x0,  AVP2Memory.GameStates.GameNotLoaded },
                         { 0x88, AVP2Memory.GameStates.InGame },
-                        { 0xA0, AVP2Memory.GameStates.PauseMenu },
-                        { 0xC8, AVP2Memory.GameStates.MainMenu },
-                        { 0x98, AVP2Memory.GameStates.Loading },
+                        { 0xA4, AVP2Memory.GameStates.PauseMenu },
+                        { 0xE1, AVP2Memory.GameStates.MainMenu },
+                        { 0x9C, AVP2Memory.GameStates.Loading },
                     },
                     CampaignStarts = new[] { "M1S1", "P1S1", "A1S1" },
                     CampaignEnds   = new[] { "M7S2", "P7S2", "A7S3" },
