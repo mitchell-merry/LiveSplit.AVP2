@@ -83,9 +83,13 @@ namespace Livesplit.AVP2.Memory
             if (info.GameStates.ContainsKey(val)) {
                 GameState = info.GameStates[val];
             } else {
-                Utility.Log("Unknown game state " + val.ToString("X") + " found!");
+                Utility.Log("Unknown game state 0x" + val.ToString("X") + " found!");
             }
 
+            if (OldGameState != GameState)
+            {
+                Utility.Log("GameState: 0x" + OldGameState.ToString("X") + " -> 0x" + GameState.ToString("X"));
+            }
         }
 
         private static void UpdateLevelName()
@@ -106,14 +110,22 @@ namespace Livesplit.AVP2.Memory
             new DeepPointer(object_lto + info.LevelName.Base, info.LevelName.Offsets)
                  .DerefString(_process, ReadStringType.ASCII, sb);
             LevelName = sb.ToString() ?? "NONE";
-            //LevelName = _pm.TraverseStringASCII(objectlto.BaseAddress + info.LevelName.Base, info.LevelName.Offsets, 32);
+
+            if (OldLevelName != LevelName)
+            {
+                Utility.Log("LevelName: " + OldLevelName + " -> " + LevelName);
+            }
         }
 
         private static void UpdateHasControl()
         {
             HadControl = HasControl;
             HasControl = new DeepPointer("cshell.dll", info.HasControl.Base, info.HasControl.Offsets).Deref<bool>(_process, false);
-            //HasControl = _pm.TraverseBoolean(cshell.BaseAddress + info.HasControl.Base, info.HasControl.Offsets) ?? false;
+
+            if (HadControl != HasControl)
+            {
+                Utility.Log("HasControl: " + HadControl + " -> " + HasControl);
+            }
         }
 
         private static void UpdateHealth()
