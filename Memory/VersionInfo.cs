@@ -42,14 +42,15 @@ namespace Livesplit.AVP2.Memory
                         { 0x0,  AVP2Memory.GameStates.GameNotLoaded },
                         { 0x88, AVP2Memory.GameStates.InGame },
                         { 0xA4, AVP2Memory.GameStates.PauseMenu },
-                        { 0xE1, AVP2Memory.GameStates.MainMenu },
+                        { 0xCC, AVP2Memory.GameStates.MainMenu },
                         { 0x9C, AVP2Memory.GameStates.Loading },
                     },
                     CampaignStarts = new[] { "M1S1", "P1S1", "A1S1" },
                     CampaignEnds   = new[] { "M7S2", "P7S2", "A7S3" },
-                    ILStarts       = new[] { "M1S1", "M2S1", "M3_OPEN", "M4_OPEN", "M5S1", "M6S1", "M7S1", 
-                                             "P1S1", "P2S1",    "P3S1",    "P4S1", "P5S1", "P6S1", "P7S1",
-                                             "A1S1", "A2S1",    "A3S1", "A4_OPEN", "A5S1", "A6S1", "A7S1" },
+                    // do NOT include campaign starts in this list - they start at a later point
+                    ILStarts       = new[] { "M2S1", "M3_OPEN", "M4_OPEN", "M5S1", "M6S1", "M7S1", 
+                                             "P2S1",    "P3S1",    "P4S1", "P5S1", "P6S1", "P7S1",
+                                             "A2S1",    "A3S1", "A4_OPEN", "A5S1", "A6S1", "A7S1" },
                     Cutscenes      = new[] { "M_CLOSE", "M_OPEN", "M3_OPEN", "M4_OPEN",
                                              "P_OPEN", "A_OPEN", "A4_OPEN", "OUTRO" },
                 }
@@ -70,9 +71,10 @@ namespace Livesplit.AVP2.Memory
                     },
                     CampaignStarts = new[] { "H1S2", "P1S1", "A1S1" },
                     CampaignEnds   = new[] { "H3S2", "P3S3", "A3S3" },
-                    ILStarts       = new[] { "H1S2", "H2S1", "H3S1",
-                                             "P1S1", "P2S1", "P3S1",
-                                             "A1S1", "A2S1", "A3S1" },
+                    // do NOT include campaign starts in this list - they start at a later point
+                    ILStarts       = new[] { "H2S1", "H3S1",
+                                             "P2S1", "P3S1",
+                                             "A2S1", "A3S1" },
                     Cutscenes      = new[] { "OUTRO" },
                 }
             }

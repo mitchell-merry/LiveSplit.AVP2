@@ -93,9 +93,20 @@ namespace LiveSplit.UI.Components
             if (AVP2Memory.GameState == AVP2Memory.GameStates.InGame
              && AVP2Memory.HasControl && !AVP2Memory.HadControl)
             {
-                if (AVP2Memory.info.CampaignStarts.Contains(AVP2Memory.LevelName)) return true;
+                if (AVP2Memory.info.CampaignStarts.Contains(AVP2Memory.LevelName))
+                {
+                    return true;
+                }
+            }
 
-                if (Settings.ILTimer && AVP2Memory.info.ILStarts.Contains(AVP2Memory.LevelName)) return true;
+            // ILs start from the cutscene, as soon as you load into the level! Or at least they should
+            if (AVP2Memory.GameState == AVP2Memory.GameStates.InGame
+             && AVP2Memory.OldGameState == AVP2Memory.GameStates.Loading)
+            {
+                if (Settings.ILTimer && AVP2Memory.info.ILStarts.Contains(AVP2Memory.LevelName))
+                { 
+                    return true;
+                }
             }
 
             return false;
@@ -165,22 +176,22 @@ namespace LiveSplit.UI.Components
         {
             if (AVP2Memory.LevelName != AVP2Memory.OldLevelName)
             {
-                Utility.Log("LN: " + AVP2Memory.LevelName + " from " + AVP2Memory.OldLevelName);
+                Utility.Log("LevelName: " + AVP2Memory.LevelName + " from " + AVP2Memory.OldLevelName);
             }
 
             if (AVP2Memory.GameState != AVP2Memory.OldGameState)
             {
-                Utility.Log("GS: " + AVP2Memory.GameState + " from " + AVP2Memory.OldGameState);
+                Utility.Log("GameState: " + AVP2Memory.GameState + " from " + AVP2Memory.OldGameState);
             }
 
             if (AVP2Memory.HasControl != AVP2Memory.HadControl)
             {
-                Utility.Log("HC: " + AVP2Memory.HasControl + " from " + AVP2Memory.HadControl);
+                Utility.Log("HasControl: " + AVP2Memory.HasControl + " from " + AVP2Memory.HadControl);
             }
 
             if (AVP2Memory.Health != AVP2Memory.Health)
             {
-                Utility.Log("HT: " + AVP2Memory.Health + " from " + AVP2Memory.Health);
+                Utility.Log("Health: " + AVP2Memory.Health + " from " + AVP2Memory.Health);
             }
         }
 
